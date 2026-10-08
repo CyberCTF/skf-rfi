@@ -1,0 +1,129 @@
+{
+  "generated_by_isoloom": "from isoloom.yml; don't edit: change the spec and run `isoloom generate` (`isoloom check` fails when this file is out of date)",
+  "resolved_version": 1,
+  "name": "skf-rfi",
+  "instance": null,
+  "inputs": [],
+  "networks": {
+    "lab": {
+      "cidr": "10.60.142.0/24",
+      "docker_cidr": "10.60.142.0/24",
+      "internet": true,
+      "gateway": null,
+      "gateway_address": "10.60.142.1",
+      "router": null,
+      "controller": "10.60.142.253"
+    }
+  },
+  "reach": [],
+  "machines": {
+    "web": {
+      "access": false,
+      "supplied": false,
+      "shapes": [
+        "docker"
+      ],
+      "arch": "amd64",
+      "os": null,
+      "windows": false,
+      "addresses": {
+        "lab": "10.60.142.10"
+      },
+      "docker_addresses": {
+        "lab": "10.60.142.10"
+      },
+      "services": [
+        {
+          "port": 5000,
+          "name": "web",
+          "http": true,
+          "publish": 5050
+        }
+      ],
+      "depends_on": [],
+      "inputs": [],
+      "volumes": {},
+      "resources": {
+        "cpus": 1,
+        "memory_mb": 256,
+        "disk_gb": 20
+      },
+      "gateway_of": [],
+      "routes": [],
+      "default_gateway": null,
+      "offline": false
+    }
+  },
+  "start_order": [
+    "web"
+  ],
+  "clones": {},
+  "tools": {},
+  "groups": {},
+  "router": null,
+  "controller": {
+    "addresses": {
+      "lab": "10.60.142.253"
+    }
+  },
+  "published": [
+    {
+      "machine": "web",
+      "port": 5000,
+      "host_port": 5050
+    }
+  ],
+  "targets": {
+    "possible": [
+      "docker",
+      "hosted",
+      "docker-vm",
+      "cloud-docker",
+      "kubernetes"
+    ],
+    "generated": [
+      "docker",
+      "hosted",
+      "docker-vm",
+      "cloud-docker",
+      "kubernetes"
+    ],
+    "refused": {},
+    "not_possible": {
+      "hybrid": "only when some machines are containers and others are VMs",
+      "vagrant": "needs `vm:` on web",
+      "proxmox": "needs `vm:` on web",
+      "cloud-vm": "needs `vm:` on web",
+      "external": "needs `external:` on web"
+    }
+  },
+  "checks": {
+    "default_position": "networks",
+    "positions": [
+      {
+        "position": "networks",
+        "machine": null,
+        "runner": "isoloom-check",
+        "checks": [
+          {
+            "name": "the lab answers",
+            "derived": false,
+            "kind": "http",
+            "target": "http://web:5000/",
+            "expect": "200",
+            "wait": 120
+          },
+          {
+            "name": "the command form posts a filename to /cmd",
+            "derived": false,
+            "kind": "script",
+            "target": "checks/form.sh",
+            "expect": "",
+            "wait": 0
+          }
+        ]
+      }
+    ]
+  },
+  "message": "OWASP SKF Remote File Inclusion answers at http://localhost:5050/.\nEach command is a file the server downloads and evaluates. Does it have to come from the server itself?\n"
+}
