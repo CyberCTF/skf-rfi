@@ -4,11 +4,5 @@
   "question": "Make the application fetch and evaluate Python code hosted on a server you control (remote file inclusion), and use it to run a command.",
   "category": "WEB",
   "difficulty": 2,
-  "evidence_kind": "SECRET",
-  "capabilities": [
-    "rfi",
-    "file-inclusion",
-    "remote-code-execution",
-    "python-eval"
-  ]
+  "evidence_kind": "SECRET"
 }
