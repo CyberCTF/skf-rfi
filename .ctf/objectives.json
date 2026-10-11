@@ -1,0 +1,52 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Make the application evaluate code of yours and read /ctf/flag.",
+      "check": {
+        "evidence": "SECRET",
+        "format": "FLAG{%s}"
+      },
+      "dev": "FLAG{dev-skf-rfi}",
+      "hints": [
+        "The chosen file is fetched over HTTP and its content passed to a Python builtin.",
+        "Read about remote file inclusion; which Python builtin runs a string as code?"
+      ],
+      "steps": [
+        {
+          "key": "param",
+          "title": "Find the input",
+          "prompt": "Which form field holds the file to fetch? (field name)",
+          "check": {
+            "answer": [
+              "filename"
+            ]
+          }
+        },
+        {
+          "key": "builtin",
+          "title": "Find the sink",
+          "prompt": "Which Python builtin runs the fetched content?",
+          "check": {
+            "answer": [
+              "eval",
+              "eval()"
+            ]
+          }
+        },
+        {
+          "key": "class",
+          "title": "Name the weakness",
+          "prompt": "What class of vulnerability is this?",
+          "check": {
+            "answer": [
+              "remote file inclusion",
+              "rfi"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

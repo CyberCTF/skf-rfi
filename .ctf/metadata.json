@@ -1,7 +1,7 @@
 {
   "title": "OWASP SKF Remote File Inclusion",
   "description": "A Flask page that runs predefined commands: it fetches the chosen file over HTTP and passes its content to Python's eval(). A full URL is fetched as is.",
-  "question": "Make the application fetch and evaluate Python code hosted on a server you control (remote file inclusion), and use it to run a command.",
+  "question": "Make the application fetch and evaluate Python code from a server you control (remote file inclusion), then read /ctf/flag.",
   "category": "WEB",
   "difficulty": 2,
   "evidence_kind": "SECRET"
